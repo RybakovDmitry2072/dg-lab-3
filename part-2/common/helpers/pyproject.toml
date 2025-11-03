@@ -1,0 +1,15 @@
+# common/vault-helper/pyproject.toml
+[project]
+name = "vault-helper"
+version = "0.1.0"
+description = "Vault helper for consumer and producer"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "requests>=2.32.5",
+    "python-dotenv>=1.2.1",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
