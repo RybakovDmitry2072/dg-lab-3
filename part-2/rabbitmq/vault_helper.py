@@ -4,6 +4,7 @@ import os
 
 load_dotenv()
 
+
 class VaultHelper:
     """
     A helper class for interacting with Hashicorp's Vault.
@@ -68,11 +69,3 @@ class VaultHelper:
         :return: dict
         """
         return self.__get_secrets(secret_path='rabbitmq')
-
-
-def main():
-    vault_helper = VaultHelper()
-    print(vault_helper.get_api_key('weather-api-key'))
-
-if __name__ == '__main__':
-    main()
