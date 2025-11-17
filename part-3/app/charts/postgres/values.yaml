@@ -1,0 +1,36 @@
+service:
+  type: ClusterIP
+  ports:
+    port: 5432
+    targetPort: 5432
+
+statefulset:
+  mountPath: /var/lib/postgresql/data
+  replicas: 1
+  image:
+    name: postgres
+    tag: 14.0-alpine
+  pvc:
+    accessModes: ReadWriteOnce
+    storageClassName: standard
+    resources:
+        requests:
+          storage: 10Gi
+  env:
+    values: {}
+    config:
+      DB_HOST: ENGINE_HOST
+      DB_PORT: ENGINE_PORT
+    secret:
+      POSTGRES_PASSWORD: ENGINE_PASSWORD
+      POSTGRES_USER: ENGINE_USERNAME
+      POSTGRES_DB: ENGINE_NAME
+
+config:
+  ENGINE_PORT: 5432
+  ENGINE_HOST: postgres-service.lab.svc.cluster.local
+
+#secret:
+#  ENGINE_USERNAME: username
+#  ENGINE_PASSWORD: password
+#  ENGINE_NAME: name

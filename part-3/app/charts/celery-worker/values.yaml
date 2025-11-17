@@ -1,0 +1,32 @@
+deployment:
+  replicaCount: 1
+  command: ["python"]
+  args: ["-m", "celery", "-A", "app.celery.celery_app", "worker", "-l", "DEBUG"]
+  env:
+    values:
+      VAULT_ADDR: "http://vault.vault.svc.cluster.local:8200"
+      VAULT_AUTH_METHOD: approle
+      VAULT_ROLE_ID: e2744d7f-4d36-c75e-8ebe-743807064704
+      VAULT_SECRET_ID: 8c2d0bdf-0298-3d23-9219-4f6f66b23a00
+      api_key_for_weather: 2f28acc96b33453c8dc170915250211
+      api_key_for_event: 435RjGtvqVvNkO5GdKCs8nVKNRrqmayG
+    config:
+      postgres:
+        ENGINE_PORT: ENGINE_PORT
+        ENGINE_HOST: ENGINE_HOST
+      rabbitmq:
+        BROKER_HOST: host
+        BROKER_PORT: port
+    secret:
+      postgres:
+        ENGINE_USERNAME: ENGINE_USERNAME
+        ENGINE_PASSWORD: ENGINE_PASSWORD
+        ENGINE_NAME: ENGINE_NAME
+      rabbitmq:
+        BROKER_USERNAME: username
+        BROKER_PASSWORD: password
+
+service:
+  ports:
+    port: 80
+    targetPort: 80

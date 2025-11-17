@@ -1,0 +1,33 @@
+global:
+  secret:
+    postgres: postgres-secret
+    rabbitmq: rabbit-secret
+  config:
+    postgres: postgres-config
+    rabbitmq: rabbit-config
+  service:
+    postgres: postgres-service
+    flower: flower-service
+    back: back-service
+  images:
+    api:
+      repository: rybakodmitry2077/weather-events-api-app
+      tag: 0.1.1
+
+
+rabbitmq:
+  secret:
+    username: ref+vault://secrets/rabbitmq#/username
+    password: ref+vault://secrets/rabbitmq#/password
+
+
+postgres:
+  secret:
+    ENGINE_USERNAME: ref+vault://secrets/db#/postgres-user
+    ENGINE_PASSWORD: ref+vault://secrets/db#/postgres-password
+    ENGINE_NAME: ref+vault://secrets/db#/postgres-name
+
+ingress:
+  className: nginx
+  host: api.local
+

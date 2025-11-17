@@ -1,0 +1,7 @@
+service:
+  ports:
+    port: 5672
+
+config:
+  host: "my-rabbitmq.rabbitmq.svc.cluster.local"
+
